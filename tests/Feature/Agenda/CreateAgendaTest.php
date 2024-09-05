@@ -51,5 +51,6 @@ it('should be able to validate before create a agenda', function ($f, $v) {
 
 })->with([
     'name::required' => [ 'field' =>'name', 'value' => ''],
+    'name::max' => [ 'field' =>'name', 'value' => str_repeat('*',256)],
 ]);
 

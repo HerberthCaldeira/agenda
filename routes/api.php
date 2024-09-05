@@ -14,6 +14,7 @@ Route::group([
     Route::prefix('agenda')->group(function () {
         Route::get('/', [AgendaController::class, 'index'])->name('agenda.index');
         Route::post('/store', [AgendaController::class, 'store'])->name('agenda.store');
+        Route::put('/{agenda}/update', [AgendaController::class, 'update'])->name('agenda.update');
     });
 
 });
