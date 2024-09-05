@@ -6,7 +6,7 @@ use App\Models\User;
 it('should be able to delete agenda', function () {
     $user = User::factory()->create();
 
-    $agenda = Agenda::factory()->create();
+    $agenda = Agenda::factory()->has(\App\Models\Contact::factory(2))->create();
 
     $this->actingAs($user);
 
@@ -14,5 +14,10 @@ it('should be able to delete agenda', function () {
 
     $response->assertNoContent();
 
-    $this->assertSoftDeleted($agenda);
+    $this->assertSoftDeleted('agendas', ['id' => $agenda->id]);
+
+    foreach ($agenda->contacts as $contact) {
+        $this->assertSoftDeleted('contacts', ['id' => $contact->id]);
+    }
+
 });

@@ -38,6 +38,7 @@ class AgendaController extends Controller
 
     public function destroy(Request $request, Agenda $agenda): Response
     {
+        $agenda->contacts()->delete();
         $agenda->delete();
 
         return response()->noContent();
