@@ -24,7 +24,7 @@ it('should be able to edit a agenda', function () {
 
     $this->assertDatabaseCount('agendas', 1);
 
-    $this->assertDatabaseHas('agendas', $agenda->toArray());
+    $this->assertDatabaseHas('agendas', array_merge($data->toArray(), ['updated_by' => $user->id]));
 
 });
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Agenda;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAgendaRequest;
 use App\Http\Requests\UpdateAgendaRequest;
 use App\Http\Resources\AgendaResource;

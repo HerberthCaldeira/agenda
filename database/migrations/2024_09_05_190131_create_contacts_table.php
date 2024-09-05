@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('description');
+            $table->foreignId('agenda_id')->constrained('agendas');
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->foreignId('deleted_by')->nullable()->constrained('users');

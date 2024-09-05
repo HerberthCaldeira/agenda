@@ -18,7 +18,7 @@ it('should be able to create an agenda', function () {
 
     $this->assertDatabaseCount('agendas', 1);
 
-    $this->assertDatabaseHas('agendas', $data->toArray());
+    $this->assertDatabaseHas('agendas', array_merge($data->toArray(), ['created_by' => $user->id]));
 
 });
 
