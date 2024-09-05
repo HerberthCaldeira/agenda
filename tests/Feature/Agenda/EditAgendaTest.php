@@ -28,6 +28,23 @@ it('should be able to edit a agenda', function () {
 
 });
 
+it('should be able to return agenda to edit', function () {
+
+    $user = User::factory()->create();
+
+    $agenda = Agenda::factory()->create();
+
+    $this->actingAs($user);
+
+    $response = $this->getJson(route('agenda.edit', ['agenda'=> $agenda->id]));
+
+    $response->assertJson(['data' => $agenda->only(['id', 'name'])]);
+
+    $response->assertOk();
+
+
+});
+
 it('should not be able to edit a agenda if user is unauthenticated', function () {
 
     $agenda = Agenda::factory()->create();
