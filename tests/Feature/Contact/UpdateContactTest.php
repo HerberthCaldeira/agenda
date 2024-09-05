@@ -45,6 +45,28 @@ it('should not be able to update a contact if user is unauthenticated', function
 
 });
 
+it('should be able to return a contact to edit', function () {
+
+    $user = User::factory()->create();
+
+    $contact = Contact::factory()->for(Agenda::factory())->create();
+
+    $this->actingAs($user);
+
+    $response = $this->getJson(route('contact.edit', ['agenda' => $contact->agenda, 'contact' => $contact ]));
+
+    $response->assertJson(['data' => array_merge(
+        $contact->only(['id','name','email','phone','description']),
+        [
+            'agenda' => $contact->agenda->only(['id', 'name'])
+        ]
+    )]);
+
+    $response->assertOk();
+
+});
+
+
 it('should be able to validate before update a contact', function ($f, $v) {
     $user = User::factory()->create();
 

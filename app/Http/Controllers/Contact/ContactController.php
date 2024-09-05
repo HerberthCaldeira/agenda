@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Agenda;
 use App\Models\Contact;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class ContactController extends Controller
 {
@@ -19,10 +21,21 @@ class ContactController extends Controller
         return ContactResource::make($item);
     }
 
+    public function edit(Request $request, Agenda $agenda, Contact $contact): JsonResource
+    {
+        return ContactResource::make($contact->load('agenda'));
+    }
+
     public function update(UpdateContactRequest $request, Agenda $agenda, Contact $contact): JsonResource
     {
         $contact->update($request->validated());
         $contact->load('agenda');
         return ContactResource::make($contact);
+    }
+
+    public function destroy(Request $request, Agenda $agenda, Contact $contact): Response
+    {
+        $contact->delete();
+        return response()->noContent();
     }
 }
