@@ -13,7 +13,7 @@ it('should be able to edit a agenda', function () {
 
     $this->actingAs($user);
 
-    $response = $this->putJson(route('agenda.update', ['agenda'=> $agenda->id]), $data->toArray());
+    $response = $this->putJson(route('agenda.update', ['agenda' => $agenda->id]), $data->toArray());
 
     //refresh from database
     $agenda->refresh();
@@ -36,12 +36,11 @@ it('should be able to return agenda to edit', function () {
 
     $this->actingAs($user);
 
-    $response = $this->getJson(route('agenda.edit', ['agenda'=> $agenda->id]));
+    $response = $this->getJson(route('agenda.edit', ['agenda' => $agenda->id]));
 
     $response->assertJson(['data' => $agenda->only(['id', 'name'])]);
 
     $response->assertOk();
-
 
 });
 
@@ -51,7 +50,7 @@ it('should not be able to edit a agenda if user is unauthenticated', function ()
 
     $data = Agenda::factory()->make();
 
-    $response = $this->putJson(route('agenda.update', ['agenda'=> $agenda->id]), $data->toArray());
+    $response = $this->putJson(route('agenda.update', ['agenda' => $agenda->id]), $data->toArray());
 
     $response->assertUnauthorized();
 
@@ -67,7 +66,7 @@ it('should be able to validate before edit a agenda', function ($f, $v) {
 
     $this->actingAs($user);
 
-    $response = $this->putJson(route('agenda.update', ['agenda'=> $agenda->id]), [
+    $response = $this->putJson(route('agenda.update', ['agenda' => $agenda->id]), [
         $f => $v,
     ]);
 
@@ -78,6 +77,6 @@ it('should be able to validate before edit a agenda', function ($f, $v) {
     $this->assertDatabaseMissing('agendas', [$f => $v]);
 
 })->with([
-    'name::required' => [ 'field' =>'name', 'value' => ''],
-    'name::max' => [ 'field' =>'name', 'value' => str_repeat('*',256)],
+    'name::required' => ['field' => 'name', 'value' => ''],
+    'name::max' => ['field' => 'name', 'value' => str_repeat('*', 256)],
 ]);

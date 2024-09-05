@@ -18,5 +18,4 @@ trait RegisterActions
             $model->deleted_by = auth()->id();
         });
     }
-
 }

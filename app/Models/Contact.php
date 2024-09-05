@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
-    use HasFactory,SoftDeletes, GlobalRelationships, RegisterActions;
+    use GlobalRelationships,HasFactory, RegisterActions, SoftDeletes;
 
     protected $table = 'contacts';
+
     protected $fillable = [
         'name',
         'email',

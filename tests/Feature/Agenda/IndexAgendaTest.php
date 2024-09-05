@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Agenda;
 use App\Models\User;
 
@@ -19,4 +18,3 @@ it('should be able to return list of agendas', function () {
     $response->assertJsonCount(15, 'data');
 
 });
-

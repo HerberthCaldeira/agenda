@@ -10,7 +10,7 @@ it('should be able to delete agenda', function () {
 
     $this->actingAs($user);
 
-    $response = $this->deleteJson(route('agenda.destroy', ['agenda'=> $agenda->id]));
+    $response = $this->deleteJson(route('agenda.destroy', ['agenda' => $agenda->id]));
 
     $response->assertNoContent();
 

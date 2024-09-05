@@ -13,21 +13,32 @@ use Illuminate\Http\Response;
 
 class AgendaController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection {
+    public function index(Request $request): AnonymousResourceCollection
+    {
         return AgendaResource::collection(Agenda::query()->paginate());
     }
-    public function store(StoreAgendaRequest $request): JsonResource {
+
+    public function store(StoreAgendaRequest $request): JsonResource
+    {
         return AgendaResource::make(Agenda::create($request->validated()));
     }
-    public function edit(Request $request, Agenda $agenda): JsonResource {
+
+    public function edit(Request $request, Agenda $agenda): JsonResource
+    {
         return AgendaResource::make($agenda);
     }
-    public function update(UpdateAgendaRequest $request, Agenda $agenda): JsonResource {
+
+    public function update(UpdateAgendaRequest $request, Agenda $agenda): JsonResource
+    {
         $agenda->update($request->validated());
+
         return AgendaResource::make($agenda);
     }
-    public function destroy(Request $request, Agenda $agenda): Response {
+
+    public function destroy(Request $request, Agenda $agenda): Response
+    {
         $agenda->delete();
+
         return response()->noContent();
     }
 }

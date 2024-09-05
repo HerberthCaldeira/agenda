@@ -21,7 +21,4 @@ trait GlobalRelationships
     {
         return $this->belongsTo(User::class, 'deleted_by');
     }
-
 }
-
-

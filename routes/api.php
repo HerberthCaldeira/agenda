@@ -9,7 +9,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware' => 'auth:sanctum'
+    'middleware' => 'auth:sanctum',
 ], function () {
     Route::prefix('agenda')->group(function () {
         Route::get('/', [AgendaController::class, 'index'])->name('agenda.index');

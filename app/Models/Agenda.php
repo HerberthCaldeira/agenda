@@ -11,13 +11,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Agenda extends Model
 {
-    use HasFactory, SoftDeletes, GlobalRelationships, RegisterActions;
+    use GlobalRelationships, HasFactory, RegisterActions, SoftDeletes;
 
     protected $table = 'agendas';
 
     protected $fillable = ['name'];
 
-    public function contacts(): HasMany {
+    public function contacts(): HasMany
+    {
         return $this->hasMany(Contact::class);
     }
 }
