@@ -15,8 +15,6 @@ it('should be able to return list of agendas', function () {
 
     $response = $this->getJson(route('agenda.index'));
 
-    ds($response->json());
-
     $response->assertOk();
 
     $response->assertJsonCount(15, 'data');
