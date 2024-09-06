@@ -5,7 +5,6 @@ use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-
 it('should be able to update a contact', function () {
 
     $user = User::factory()->create();
@@ -18,14 +17,14 @@ it('should be able to update a contact', function () {
 
     $this->actingAs($user);
 
-    $response = $this->putJson(route('contact.update', ['agenda' => $contact->agenda, 'contact' => $contact ]), $data->toArray());
+    $response = $this->putJson(route('contact.update', ['agenda' => $contact->agenda, 'contact' => $contact]), $data->toArray());
 
     $response->assertOk();
 
     $response->assertJson([
         'data' => array_merge($data->toArray(), [
-            'agenda' => $contact->agenda->only(['id', 'name'])
-        ])
+            'agenda' => $contact->agenda->only(['id', 'name']),
+        ]),
     ]);
 
     $this->assertDatabaseCount('contacts', 1);
@@ -44,7 +43,7 @@ it('should not be able to update a contact if user is unauthenticated', function
 
     $data = Contact::factory(['name' => 'teste'])->make();
 
-    $response = $this->putJson(route('contact.update', ['agenda' => $contact->agenda, 'contact' => $contact ]), $data->toArray());
+    $response = $this->putJson(route('contact.update', ['agenda' => $contact->agenda, 'contact' => $contact]), $data->toArray());
 
     $response->assertUnauthorized();
 
@@ -60,19 +59,18 @@ it('should be able to return a contact to edit', function () {
 
     $this->actingAs($user);
 
-    $response = $this->getJson(route('contact.edit', ['agenda' => $contact->agenda, 'contact' => $contact ]));
+    $response = $this->getJson(route('contact.edit', ['agenda' => $contact->agenda, 'contact' => $contact]));
 
     $response->assertJson(['data' => array_merge(
-        $contact->only(['id','name','email','phone','description']),
+        $contact->only(['id', 'name', 'email', 'phone', 'description']),
         [
-            'agenda' => $contact->agenda->only(['id', 'name'])
+            'agenda' => $contact->agenda->only(['id', 'name']),
         ]
     )]);
 
     $response->assertOk();
 
 });
-
 
 it('should be able to validate before update a contact', function ($f, $v) {
     $user = User::factory()->create();
@@ -85,8 +83,8 @@ it('should be able to validate before update a contact', function ($f, $v) {
 
     $response = $this->putJson(
         route('contact.update', ['agenda' => $contact->agenda, 'contact' => $contact]), [
-        $f => $v,
-    ]);
+            $f => $v,
+        ]);
 
     $response->assertUnprocessable();
 
@@ -105,8 +103,7 @@ it('should be able to validate before update a contact', function ($f, $v) {
     'description::max' => ['field' => 'description', 'value' => str_repeat('*', 256)],
 ]);
 
-
-it('should be able to edit only if user is owner or has permission', function (){
+it('should be able to edit only if user is owner or has permission', function () {
 
     $user = User::factory()->create();
 
@@ -123,7 +120,7 @@ it('should be able to edit only if user is owner or has permission', function ()
     $this->actingAs($user);
 
     $response = $this->putJson(
-        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id ]),
+        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id]),
         $data->toArray()
 
     );
@@ -132,7 +129,7 @@ it('should be able to edit only if user is owner or has permission', function ()
 
 });
 
-it('should be able to not edit if user is not owner and not have permission', function (){
+it('should be able to not edit if user is not owner and not have permission', function () {
 
     $user = User::factory()->create();
 
@@ -151,7 +148,7 @@ it('should be able to not edit if user is not owner and not have permission', fu
     $this->actingAs($user2);
 
     $response = $this->putJson(
-        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id ]),
+        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id]),
         $data->toArray()
 
     );
@@ -160,7 +157,7 @@ it('should be able to not edit if user is not owner and not have permission', fu
 
 });
 
-it('should be able to  edit if user is not owner but have permission', function (){
+it('should be able to  edit if user is not owner but have permission', function () {
 
     $user = User::factory()->create();
 
@@ -179,17 +176,15 @@ it('should be able to  edit if user is not owner but have permission', function 
             'can_edit' => true,
             'can_see' => true,
             'user_id' => $user2->id,
-            'agenda_id' => $contact->agenda->id
+            'agenda_id' => $contact->agenda->id,
         ]);
 
-
     $data = Contact::factory()->make();
-
 
     $this->actingAs($user2);
 
     $response = $this->putJson(
-        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id ]),
+        route('contact.update', ['agenda' => $contact->agenda->id, 'contact' => $contact->id]),
         $data->toArray()
 
     );
@@ -197,4 +192,3 @@ it('should be able to  edit if user is not owner but have permission', function 
     $response->assertOk();
 
 });
-

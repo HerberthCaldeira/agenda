@@ -35,12 +35,6 @@ Route::group([
             Route::delete('/{contact}/delete', [ContactController::class, 'destroy'])->name('contact.destroy');
         });
 
-
-
     });
-
-
-
-
 
 });

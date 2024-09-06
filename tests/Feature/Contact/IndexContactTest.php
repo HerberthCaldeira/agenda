@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Agenda;
 use App\Models\Contact;
 use App\Models\User;

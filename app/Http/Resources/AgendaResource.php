@@ -18,7 +18,7 @@ class AgendaResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'created_by' => $this->created_by,
-            'permissions' => $this->whenLoaded('users')
+            'permissions' => $this->whenLoaded('users'),
         ];
     }
 }

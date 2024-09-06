@@ -29,6 +29,7 @@ class AgendaController extends Controller
                 ->paginate()
         );
     }
+
     public function show(Request $request, Agenda $agenda): JsonResource
     {
         return AgendaResource::make($agenda);

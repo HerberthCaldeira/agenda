@@ -23,11 +23,10 @@ class Agenda extends Model
         return $this->hasMany(Contact::class);
     }
 
-    public function users(): BelongsToMany {
+    public function users(): BelongsToMany
+    {
         return $this
             ->belongsToMany(User::class, 'agenda_user', 'agenda_id', 'user_id')
             ->withPivot(['can_see', 'can_edit']);
     }
-
-
 }

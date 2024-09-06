@@ -18,7 +18,7 @@ it('should be able to create a contact for an agenda', function () {
 
     $response->assertCreated();
 
-    $response->assertJson(['data' => array_merge($data->toArray(), ['agenda' => $agenda->only(['id', 'name'])]) ]);
+    $response->assertJson(['data' => array_merge($data->toArray(), ['agenda' => $agenda->only(['id', 'name'])])]);
 
     $this->assertDatabaseCount('contacts', 1);
 
@@ -49,8 +49,8 @@ it('should be able to validate before create a agenda', function ($f, $v) {
 
     $response = $this->postJson(
         route('contact.store', ['agenda' => $agenda]), [
-        $f => $v,
-    ]);
+            $f => $v,
+        ]);
 
     $response->assertUnprocessable();
 
@@ -68,4 +68,3 @@ it('should be able to validate before create a agenda', function ($f, $v) {
     'description::required' => ['field' => 'description', 'value' => ''],
     'description::max' => ['field' => 'description', 'value' => str_repeat('*', 256)],
 ]);
-

@@ -2,10 +2,8 @@
 
 use App\Models\Agenda;
 use App\Models\User;
-use Laravel\Sanctum\Sanctum;
 
-
-it('should be return users for share agenda', function (){
+it('should be return users for share agenda', function () {
 
     $user = User::factory()->create();
     $agenda = Agenda::factory()->create();
@@ -16,8 +14,8 @@ it('should be return users for share agenda', function (){
 
     $user3 = User::factory(['name' => 'Peter has agenda already'])->create();
     $agenda->users()->attach($user3, [
-        'can_see'=> 1,
-        'can_edit'=> 1,
+        'can_see' => 1,
+        'can_edit' => 1,
     ]);
 
     $this->actingAs($user);
@@ -27,14 +25,13 @@ it('should be return users for share agenda', function (){
     $response->assertOk();
 
     $response->assertJson(['data' => [
-            array_merge($user2->only(['id', 'name']), ['agendas' => []]),
-            $user3->only(['id', 'name']),
-        ]
+        array_merge($user2->only(['id', 'name']), ['agendas' => []]),
+        $user3->only(['id', 'name']),
+    ],
     ]);
 
-    $response->assertJsonCount(2,'data');
+    $response->assertJsonCount(2, 'data');
 });
-
 
 it('should be able to share agenda with users', function () {
 
@@ -50,7 +47,7 @@ it('should be able to share agenda with users', function () {
     $response = $this->postJson(
         route('agenda.share', [
             'agenda' => $agenda,
-            'user' => $userForGainPermission
+            'user' => $userForGainPermission,
         ]),
         [
             'can_see' => true,

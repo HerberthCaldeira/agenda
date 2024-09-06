@@ -44,7 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function agendas(): BelongsToMany {
+
+    public function agendas(): BelongsToMany
+    {
         return $this
             ->belongsToMany(Agenda::class, 'agenda_user', 'user_id', 'agenda_id')
             ->withPivot(['can_see', 'can_edit']);

@@ -19,7 +19,7 @@ class ContactController extends Controller
     {
         return ContactResource::collection(
             Contact::query()
-                ->with(['agenda.users' => fn($q) => $q->where('user_id', auth()->id())])
+                ->with(['agenda.users' => fn ($q) => $q->where('user_id', auth()->id())])
                 ->where(['agenda_id' => $agenda->id])
 
                 ->paginate()
@@ -30,6 +30,7 @@ class ContactController extends Controller
     {
         $item = Contact::create($request->validated());
         $item->load('agenda');
+
         return ContactResource::make($item);
     }
 
@@ -44,12 +45,14 @@ class ContactController extends Controller
 
         $contact->update($request->validated());
         $contact->load('agenda');
+
         return ContactResource::make($contact);
     }
 
     public function destroy(Request $request, Agenda $agenda, Contact $contact): Response
     {
         $contact->delete();
+
         return response()->noContent();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateContactRequest extends FormRequest
@@ -17,7 +16,7 @@ class UpdateContactRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', [ $this->route('contact')]);
+        return $this->user()->can('update', [$this->route('contact')]);
     }
 
     /**
