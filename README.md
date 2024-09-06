@@ -1,3 +1,17 @@
+# Como subir esse projeto:
+- git clone https://github.com/HerberthCaldeira/agenda.git
+- Dentro da pasta raiz:
+  - composer install --ignore-platform-reqs
+  - cp .env.example .env
+- Dentro da pasta react:
+  - cp .env.example .env 
+- Dentro da pasta raiz:
+  -  ./vendor/bin/sail up
+  -  ./vendor/bin/sail artisan key:generate
+  -  ./vendor/bin/sail artisan migrate
+    - Comando para rodar os testes:
+      -  ./vendor/bin/sail pest #To run test    
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
