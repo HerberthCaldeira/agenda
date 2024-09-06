@@ -7,11 +7,15 @@ it('should be able to return list of agendas', function () {
 
     $user = User::factory()->create();
 
-    Agenda::factory()->count(20)->create();
+    Agenda::factory(15)->create();
+
+    Agenda::query()->update(['created_by' => $user->id]);
 
     $this->actingAs($user);
 
     $response = $this->getJson(route('agenda.index'));
+
+    ds($response->json());
 
     $response->assertOk();
 
