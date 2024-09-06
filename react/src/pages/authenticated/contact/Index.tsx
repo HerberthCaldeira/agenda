@@ -21,8 +21,6 @@ export default function Index() {
     const { data, isError, error } = useGetContact({ page, agendaId });
     const { data: agenda } = useGetAgendaById({  agendaId });
 
-    console.log(agenda)
-
 
     if (isError) {
         return <div>{JSON.stringify(error)}</div>;

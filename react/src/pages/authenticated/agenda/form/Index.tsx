@@ -1,12 +1,16 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import {TAgendaCreateForm, zodSchema} from "./zodSchema";
 import Input from "../../../components/form/fields/Input";
 import { AxiosError } from "axios";
 import usePostAgenda from "../../../../actions/agenda/usePostAgenda.ts";
+import {QUERY_KEYS_AGENDA} from "../../../../actions/agenda/keys/queryKeys.ts";
 
 
 export default function Index() {
+
+    const queryClient = useQueryClient();
 
     const methods = useForm<TAgendaCreateForm>({
         defaultValues: { name: "" },
@@ -28,7 +32,7 @@ export default function Index() {
             onSuccess: () => {
                 console.log("onSuccess");
                 reset();
-
+                queryClient.invalidateQueries({ queryKey: QUERY_KEYS_AGENDA.useGetAgenda() });
             },
             onError: (err) => {
                 if (err instanceof AxiosError && err?.response.status === 422) {

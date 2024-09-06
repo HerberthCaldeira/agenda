@@ -23,9 +23,12 @@ function Login() {
       <>
           <Menu />
 
+          <form onSubmit={handlerSubmit}>
+
           <div>Login</div>
           email:
           <input
+              type='email'
               value={data.email}
               onChange={(e) =>
                   setData((prev) => ({...prev, email: e.target.value}))
@@ -33,6 +36,7 @@ function Login() {
           />
           password:{" "}
           <input
+              type='password'
               value={data.password}
               onChange={(e) =>
                   setData((prev) => ({
@@ -41,9 +45,10 @@ function Login() {
                   }))
               }
           />
-          <button type="button" onClick={handlerSubmit}>
+          <button type="submit" >
               Login
           </button>
+          </form>
       </>
   );
 }

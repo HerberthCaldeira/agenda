@@ -1,6 +1,6 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Link, useSearchParams, useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {TContactCreateForm, zodSchema} from "./zodSchema";
 import Input from "../../../components/form/fields/Input";

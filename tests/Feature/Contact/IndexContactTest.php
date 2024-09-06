@@ -17,8 +17,6 @@ it('should be able to return list of contacts', function () {
 
     $response = $this->getJson(route('contact.index', ['agenda' => $agenda]));
 
-
-
     $response->assertOk();
 
     $response->assertJsonCount(15, 'data');

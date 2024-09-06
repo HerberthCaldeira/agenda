@@ -1,8 +1,11 @@
 import { Link, useSearchParams } from "react-router-dom";
 import Paginate from "../../components/form/paginate/Paginate";
 import useGetAgenda from "../../../actions/agenda/useGetAgenda.ts";
+import { useQueryClient } from "@tanstack/react-query"
 
 export default function Index() {
+
+    const queryClient = useQueryClient();
 
     const [searchParams, setSearchParams] = useSearchParams();
 

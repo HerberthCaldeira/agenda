@@ -40,6 +40,8 @@ class ContactController extends Controller
 
     public function update(UpdateContactRequest $request, Agenda $agenda, Contact $contact): JsonResource
     {
+        //abort_if($agenda->created_by !== auth()->id(), Response::HTTP_FORBIDDEN);
+
         $contact->update($request->validated());
         $contact->load('agenda');
         return ContactResource::make($contact);

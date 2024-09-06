@@ -17,7 +17,6 @@ export default function Index() {
 
     const {data, isError, error } = useGetContactById({agendaId, contactId})
 
-
     const methods = useForm<TContactEditForm>({
         defaultValues: {
             name: data?.data?.name ,
@@ -37,10 +36,14 @@ export default function Index() {
 
     const { mutate } = usePutContact(agendaId, contactId);
 
-
     useEffect(() => {
-        if (data) {
-            reset(data);
+        if (data && data.data) {
+            reset({
+                name: data.data.name,
+                email: data.data.email,
+                phone: data.data.phone,
+                description: data.data.description,
+            });
         }
     }, [data, reset]);
     const onSubmit: SubmitHandler<TContactEditForm> = (data) => {
