@@ -4,12 +4,6 @@ use App\Models\Agenda;
 use App\Models\User;
 
 
-/*    $agenda->users()->attach($user);
-      ds($agenda->users->toArray());
-      ds(\Illuminate\Support\Facades\DB::table('agenda_user')->get());
-*/
-
-
 it('should be able to share agenda with users', function () {
 
     //user with one agenda to give permission to see and edit
