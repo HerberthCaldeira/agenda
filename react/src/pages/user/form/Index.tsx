@@ -57,7 +57,7 @@ export default function Index() {
                         <Input name={"name"} label={"nome"} type={"text"} errors={errors} />
                         <Input name={"email"} label={"E-mail"} type={"email"} errors={errors} />
                         <Input name={"password"} label={"password"} type={"password"} errors={errors} />
-                        <Input name={"password_confirmation"} label={"password"} type={"password"} errors={errors} />
+                        <Input name={"password_confirmation"} label={"repeat password"} type={"password"} errors={errors} />
 
                         <button type="submit"> SUBMIT </button>
                     </form>
