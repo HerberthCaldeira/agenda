@@ -10,8 +10,8 @@ function Login() {
   });
 
   const [data, setData] = useState<credentials>({
-    email: "teste@teste.io",
-    password: "12345678",
+    email: "",
+    password: "",
   });
 
   const handlerSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {

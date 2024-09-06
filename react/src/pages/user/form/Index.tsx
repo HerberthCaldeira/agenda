@@ -1,11 +1,14 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import {TUserCreateForm, zodSchema} from "./zodSchema";
 import Input from "../../components/form/fields/Input";
 import { AxiosError } from "axios";
 import usePostUser from "../../../actions/user/usePostUser.ts";
 
-export default function Form() {
+export default function Index() {
+
+    const navegate = useNavigate();
 
     const methods = useForm({
         defaultValues: { name: "", email: "", password: "", password_confirmation: "" },
@@ -27,6 +30,7 @@ export default function Form() {
             onSuccess: () => {
                 console.log("onSuccess");
                 reset();
+                navegate('/login')
 
             },
             onError: (err) => {

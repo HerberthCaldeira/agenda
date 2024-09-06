@@ -10,9 +10,7 @@ export default function Index() {
         <li>
           <MenuItem label={"Agenda"} route={"/dashboard/agenda"} />
         </li>
-        <li>
-          <MenuItem label={"Posts"} route={"/dashboard/posts"} />
-        </li>
+
       </ul>
     </>
   );

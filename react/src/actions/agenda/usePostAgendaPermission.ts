@@ -1,13 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "../../lib/axios/axios";
-import {TUserCreateForm} from "../../pages/user/form/zodSchema.ts";
 import {postRequest} from "../../lib/axios/requests.ts";
+interface IPermission {
+    agendaId: string;
+    userId: string;
+    can_see: boolean;
+    can_edit: boolean;
+}
 
-
-
-export default function usePostUser() {
+export default function usePostAgendaPermission() {
     const { mutate, isPending, error, isError, isSuccess } = useMutation({
-        mutationFn: (data: TUserCreateForm) => postRequest('/register',data),
+        mutationFn: (data: IPermission) => postRequest(`/api/agenda/${data.agendaId}/user/${data.userId}/share`, data),
     });
 
     return {

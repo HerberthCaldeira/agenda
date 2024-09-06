@@ -28,4 +28,6 @@ class Agenda extends Model
             ->belongsToMany(User::class, 'agenda_user', 'agenda_id', 'user_id')
             ->withPivot(['can_see', 'can_edit']);
     }
+
+
 }

@@ -1,21 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "../../lib/axios/axios";
 import {TAgendaCreateForm} from "../../pages/authenticated/agenda/form/zodSchema.ts";
-
-
-const postRequest = async (data: TAgendaCreateForm) => {
-    // eslint-disable-next-line no-useless-catch
-    try {
-        const response = await axios.post("/api/agenda/store", data);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
-};
+import {postRequest} from "../../lib/axios/requests.ts";
 
 export default function usePostAgenda() {
     const { mutate, isPending, error, isError, isSuccess } = useMutation({
-        mutationFn: (data: TAgendaCreateForm) => postRequest(data),
+        mutationFn: (data: TAgendaCreateForm) => postRequest("/api/agenda/store", data),
     });
 
     return {

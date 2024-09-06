@@ -2,16 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getRequest } from "../../lib/axios/requests";
 
 interface IParams {
-    page: number;
+    agendaId: number;
 }
 
-const useGetAgenda = ({ page }: IParams) => {
+const useGetAgendaById = ({ agendaId }: IParams) => {
     const { data, error, isError, isPending } = useQuery({
-        queryKey: ['useGetAgenda', page],
+        queryKey: ['useGetAgendaById', agendaId],
         queryFn: async () =>
-            await getRequest("/api/agenda", {
+            await getRequest(`/api/agenda/${agendaId}/show`, {
                 params: {
-                    page,
 
                 },
             }),
@@ -25,4 +24,4 @@ const useGetAgenda = ({ page }: IParams) => {
     };
 };
 
-export default useGetAgenda;
+export default useGetAgendaById;

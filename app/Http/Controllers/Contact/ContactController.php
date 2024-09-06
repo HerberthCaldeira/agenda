@@ -17,7 +17,13 @@ class ContactController extends Controller
 {
     public function index(Request $request, Agenda $agenda): AnonymousResourceCollection
     {
-        return ContactResource::collection(Contact::query()->with(['agenda'])->where(['agenda_id' => $agenda->id])->paginate());
+        return ContactResource::collection(
+            Contact::query()
+                ->with(['agenda.users' => fn($q) => $q->where('user_id', auth()->id())])
+                ->where(['agenda_id' => $agenda->id])
+
+                ->paginate()
+        );
     }
 
     public function store(StoreContactRequest $request, Agenda $agenda): JsonResource

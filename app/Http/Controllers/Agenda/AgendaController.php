@@ -16,7 +16,22 @@ class AgendaController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        return AgendaResource::collection(Agenda::query()->paginate(2));
+        return AgendaResource::collection(
+            Agenda::query()
+                ->with('users')
+                ->where(function ($query) {
+                    $query->where('created_by', auth()->user()->id)
+                        ->orWhereHas('users', function ($query) {
+                            $query->where('user_id', auth()->user()->id)
+                                ->where('can_see', true);
+                        });
+                })
+                ->paginate()
+        );
+    }
+    public function show(Request $request, Agenda $agenda): JsonResource
+    {
+        return AgendaResource::make($agenda);
     }
 
     public function store(StoreAgendaRequest $request): JsonResource

@@ -3,7 +3,6 @@ import Paginate from "../../components/form/paginate/Paginate";
 import useGetAgenda from "../../../actions/agenda/useGetAgenda.ts";
 
 export default function Index() {
-    console.log("render agenda index");
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -16,11 +15,11 @@ export default function Index() {
     if (isError) {
         return <div>{JSON.stringify(error)}</div>;
     }
-    // <pre>{JSON.stringify(data, null, 2)}</pre>
+
     return (
         <div>
             <div>
-                agenda page {page}
+                Agenda list
             </div>
             <div>
                 <Link to={"/dashboard/agenda/new"}>New</Link>
@@ -40,8 +39,9 @@ export default function Index() {
                         return (
                             <tr key={i.id}>
                                 <td>{i.id} </td>
-                                <td>{i.name} </td>
-                                <td>| <Link to={`/dashboard/agenda/${i.id}/share`}>share</Link> | </td>
+                                <td>{i.name}</td>
+                                <td><Link to={`/dashboard/agenda/${i.id}/contact`}>see</Link></td>
+                                <td>{i?.permissions?.length == 0 && (<Link to={`/dashboard/agenda/${i.id}/share`}>share</Link>)}</td>
                             </tr>
                         );
                     })}

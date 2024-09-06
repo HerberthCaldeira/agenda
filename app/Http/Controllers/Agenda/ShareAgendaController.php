@@ -21,7 +21,7 @@ class ShareAgendaController extends Controller
                 return $query->where('agenda_id', $agenda->id);
             }])
                 ->whereNot('id', auth()->user()->id)
-                ->get()
+                ->paginate()
         );
     }
     public function share(Request $request, Agenda $agenda, User $user): JsonResponse {
@@ -30,6 +30,8 @@ class ShareAgendaController extends Controller
             'can_see' => 'required|boolean',
             'can_edit' => 'required|boolean'
         ]);
+
+        $agenda->users()->detach($user);
 
         $agenda->users()->attach($user, [
             'can_see'=> $validatedData['can_see'],

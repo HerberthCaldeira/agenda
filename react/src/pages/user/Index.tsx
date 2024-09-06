@@ -1,5 +1,4 @@
-import Form from "./form/Form.tsx";
-import Menu from "../authenticated/dashboard/components/menu/Index.tsx";
+import Form from "./form/Index.tsx";
 import MenuItem from "../authenticated/dashboard/components/menu/MenuItem.tsx";
 
 export default function Index() {

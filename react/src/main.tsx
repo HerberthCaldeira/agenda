@@ -12,7 +12,10 @@ import Dashboard from "./pages/authenticated/dashboard/Dashboard";
 import CreateUser from "./pages/user/Index";
 import Agenda from "./pages/authenticated/agenda/Index"
 import CreateAgenda from "./pages/authenticated/agenda/form/Index"
+import CreateContact from "./pages/authenticated/contact/form/Index"
+import EditContact from "./pages/authenticated/contact/formEdit/Index"
 import ShareAgenda from "./pages/authenticated/agenda/share/Index"
+import Contact from "./pages/authenticated/contact/Index"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 
@@ -58,6 +61,18 @@ const router = createBrowserRouter([
         {
             path:"agenda/:agendaId/share",
             element: <ShareAgenda />
+        },
+        {
+            path:"agenda/:agendaId/contact",
+            element: <Contact />
+        },
+        {
+            path:"agenda/:agendaId/contact/new",
+            element: <CreateContact />
+        },
+        {
+            path:"agenda/:agendaId/contact/:contactId/edit",
+            element: <EditContact />
         }
     ],
   },
