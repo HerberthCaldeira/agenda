@@ -17,7 +17,7 @@ it('should be able to return list of contacts', function () {
 
     $response = $this->getJson(route('contact.index', ['agenda' => $agenda]));
 
-    ds($response->json());
+
 
     $response->assertOk();
 
