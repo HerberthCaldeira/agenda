@@ -38,7 +38,7 @@ export default function Index() {
                 </thead>
                 <tbody>
                 {data &&
-                    data?.data.map((i) => {
+                    data?.data?.map((i) => {
                         return (
                             <tr key={i.id}>
                                 <td>{i.id} </td>
