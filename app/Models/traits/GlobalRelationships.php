@@ -9,7 +9,7 @@ trait GlobalRelationships
 {
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by')->withTrashed();
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function updatedBy(): BelongsTo
