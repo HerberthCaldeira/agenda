@@ -53,8 +53,7 @@ services:
             dockerfile: Dockerfile
         ports:
             - "3000:3000" # Expor a porta 3000
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
+
         volumes:
             - ./react:/app # Sincronizar o diretório local com o container
             - /app/node_modules # Evitar sobrescrever node_modules do container
