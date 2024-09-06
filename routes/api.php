@@ -23,6 +23,7 @@ Route::group([
         Route::put('/{agenda}/update', [AgendaController::class, 'update'])->name('agenda.update');
         Route::delete('/{agenda}/delete', [AgendaController::class, 'destroy'])->name('agenda.destroy');
         /** SHARE AGENDA */
+        Route::get('/{agenda}/users', [ShareAgendaController::class, 'users'])->name('agenda.users');
         Route::post('/{agenda}/user/{user}/share', [ShareAgendaController::class, 'share'])->name('agenda.share');
 
 

@@ -3,15 +3,28 @@
 namespace App\Http\Controllers\Agenda;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\Agenda;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 
 class ShareAgendaController extends Controller
 {
-    public function share(Request $request, Agenda $agenda, User $user) {
+    public function users(Request $request, Agenda $agenda): AnonymousResourceCollection {
+
+        return UserResource::collection(
+            User::query()->with(['agendas' => function ($query) use ($agenda) {
+                return $query->where('agenda_id', $agenda->id);
+            }])
+                ->whereNot('id', auth()->user()->id)
+                ->get()
+        );
+    }
+    public function share(Request $request, Agenda $agenda, User $user): JsonResponse {
 
         $validatedData = $request->validate([
             'can_see' => 'required|boolean',
@@ -25,4 +38,5 @@ class ShareAgendaController extends Controller
 
         return response()->json(['message' => 'Agenda shared'], Response::HTTP_OK);
     }
+
 }

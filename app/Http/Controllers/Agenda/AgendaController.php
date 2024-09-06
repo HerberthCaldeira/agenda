@@ -16,7 +16,7 @@ class AgendaController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        return AgendaResource::collection(Agenda::query()->paginate());
+        return AgendaResource::collection(Agenda::query()->paginate(2));
     }
 
     public function store(StoreAgendaRequest $request): JsonResource
